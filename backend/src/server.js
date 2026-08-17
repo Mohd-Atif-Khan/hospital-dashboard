@@ -37,17 +37,18 @@ registerSocketHandlers(io);
 
 const PORT = process.env.PORT || 5000;
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log("MongoDB connected");
-    server.listen(PORT, "0.0.0.0", () => {
-      console.log(`Server listening on port ${PORT}`);
+server.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server listening on port ${PORT}`);
+});
+
+if (process.env.MONGO_URI) {
+  mongoose
+    .connect(process.env.MONGO_URI)
+    .then(() => {
+      console.log("MongoDB connected successfully");
+    })
+    .catch((err) => {
+      console.error("MongoDB connection error:", err.message);
     });
-  })
-  .catch((err) => {
-    console.error("MongoDB connection error:", err.message);
-    server.listen(PORT, "0.0.0.0", () => {
-      console.log(`Server listening on port ${PORT} (MongoDB not connected)`);
-    });
-  });
+}
+
