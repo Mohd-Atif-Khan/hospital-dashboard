@@ -1,4 +1,9 @@
 require("dotenv").config();
+if (!globalThis.crypto) {
+  try {
+    globalThis.crypto = require("crypto").webcrypto;
+  } catch (e) {}
+}
 const express = require("express");
 const cors = require("cors");
 const http = require("http");

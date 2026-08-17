@@ -1,4 +1,9 @@
 require("dotenv").config();
+if (!globalThis.crypto) {
+  try {
+    globalThis.crypto = require("crypto").webcrypto;
+  } catch (e) {}
+}
 const mongoose = require("mongoose");
 const Hospital = require("../src/models/Hospital");
 const Ambulance = require("../src/models/Ambulance");
