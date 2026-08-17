@@ -41,13 +41,13 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("MongoDB connected");
-    server.listen(PORT, () => {
+    server.listen(PORT, "0.0.0.0", () => {
       console.log(`Server listening on port ${PORT}`);
     });
   })
   .catch((err) => {
     console.error("MongoDB connection error:", err.message);
-    server.listen(PORT, () => {
+    server.listen(PORT, "0.0.0.0", () => {
       console.log(`Server listening on port ${PORT} (MongoDB not connected)`);
     });
   });
