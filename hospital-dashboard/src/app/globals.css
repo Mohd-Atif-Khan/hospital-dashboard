@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+:root {
+  --background: #08111e;
+  --foreground: #f0fdf4;
+
+  --gp-green: #10b981;
+  --gp-green-dark: #047857;
+  --gp-green-light: #34d399;
+  --gp-navy: #0b192e;
+  --gp-navy-dark: #050d1a;
+  --gp-navy-light: #132744;
+  --gp-gold: #fbbf24;
+  --gp-red: #ef4444;
+
+  --alc-navy: #0b192e;
+  --alc-navy-dark: #050d1a;
+  --alc-navy-light: #132744;
+  --alc-gold: #fbbf24;
+  --alc-red: #ef4444;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-gp-green: var(--gp-green);
+  --color-gp-green-dark: var(--gp-green-dark);
+  --color-gp-green-light: var(--gp-green-light);
+  --color-gp-navy: var(--gp-navy);
+  --color-gp-navy-dark: var(--gp-navy-dark);
+  --color-gp-navy-light: var(--gp-navy-light);
+  --color-alc-navy: var(--alc-navy);
+  --color-alc-navy-dark: var(--alc-navy-dark);
+  --color-alc-navy-light: var(--alc-navy-light);
+  --color-alc-gold: var(--alc-gold);
+  --color-alc-red: var(--alc-red);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Radar & Pulse Animations */
+@keyframes radar-pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+@keyframes ecg-line {
+  0% {
+    stroke-dashoffset: 600;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes emergency-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+    border-color: rgba(239, 68, 68, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(239, 68, 68, 0.8);
+    border-color: rgba(248, 113, 113, 1);
+  }
+}
+
+.animate-radar {
+  animation: radar-pulse 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.animate-ecg {
+  stroke-dasharray: 600;
+  animation: ecg-line 3s linear infinite;
+}
+
+.animate-emergency-glow {
+  animation: emergency-glow 2s ease-in-out infinite;
+}
+
+/* Leaflet Map Custom Marker Styles */
+.custom-ambulance-marker {
+  position: relative;
+}
+
+.ambulance-pulse-ring {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.35);
+  border: 2px solid #ef4444;
+  animation: radar-pulse 1.8s infinite ease-out;
+  pointer-events: none;
+}
+
+.leaflet-container {
+  background: #0f172a !important;
+}
+
